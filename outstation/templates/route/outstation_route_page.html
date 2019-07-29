@@ -32,10 +32,13 @@
       </div>
     </div>
     <div class="panel-header background-yellow black ">
-      <div class="header row-container-even-space width-100percent">
-        <div>
+      <div class="header row-container-even-space width-100percent bottom-align">
+        <div class="width-50percent">
           <h2>{{self.total_distance|floatformat}} km</h2>
-          <div>{{self.highway}}</div>
+          <div class="tooltip">
+            <div class="tooltip-label">{{self.highway}}</div>
+            <span class="tooltiptext">{{self.highway}}</span>
+          </div>
         </div>
         <div class="padding-top-10 right-align">
           {% include 'common/rating.html' with rating=self.road_condition_rating range='5' %}
