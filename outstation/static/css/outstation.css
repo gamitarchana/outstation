@@ -94,6 +94,9 @@ table tr td:nth-child(2){
 .width-100percent{
   width:100%;
 }
+.width-50percent{
+  width:50%;
+}
 .height-100percent{
   height:100%;
 }
@@ -104,6 +107,10 @@ table tr td:nth-child(2){
 }
 .row-reverse{
   flex-direction:row-reverse;
+}
+
+.bottom-align{
+  align-items: flex-end;
 }
 .row-container-space-around {
   display: flex;
@@ -903,6 +910,14 @@ footer #copyright{
   position: relative !important;
   display: inline-block;
   opacity:1 !important;
+  font-size: unset;
+}
+
+.tooltip-label{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size:  18px;
 }
 
 .tooltip .tooltiptext {
@@ -936,6 +951,8 @@ footer #copyright{
 }
 #popularRoutes #regionRoutes{
   width:100%;
+  padding: 0px 10px;
+  font-size: 14px;
 }
 
 @media screen and (max-width: 600px) {
@@ -1206,7 +1223,7 @@ footer #copyright{
     padding:30px;
   }
   .filter-view{
-    width: 600px;
+    width: 510px;
   }
   .tag-button-up,
   .tag-button-down,
@@ -1394,7 +1411,7 @@ footer #copyright{
     flex-wrap:nowrap;
   }
   #popularRoutes #regionRoutes{
-    width:auto;
+    width:33%;
   }
   footer #pageLinks div {
     width:auto;
