@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'wagtail.contrib.redirects',
     'wagtail.contrib.modeladmin',
     'wagtail.contrib.sitemaps',
+    "wagtail.contrib.routable_page",
     'wagtail.embeds',
     'wagtail.sites',
     'wagtail.users',
@@ -71,7 +72,6 @@ INSTALLED_APPS = [
     'qartez',
 
     'rest_framework',
-	'storages',
 ]
 
 MIDDLEWARE = [
@@ -87,10 +87,10 @@ MIDDLEWARE = [
 
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+
 ]
 
 ROOT_URLCONF = 'outstation.urls'
-
 
 
 TEMPLATES = [
@@ -125,24 +125,28 @@ GOOGLE_OAUTH2='google-oauth2'
 
 WSGI_APPLICATION = 'outstation.wsgi.application'
 
-GA_KEY_FILEPATH = os.path.join(BASE_DIR, '')
-GA_VIEW_ID = ''
-
+GA_KEY_FILEPATH = os.path.join(BASE_DIR, 'Meru Demo-f5aea0c01e07.json')
+GA_VIEW_ID = 'ga:196501366'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': '<database name>',
-        'USER': '<username>',
-        'PASSWORD':'<password>',
-        'HOST':'<DB Host>',
-        'PORT': '<DB Port>',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
+'''DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'meru_outstation',
+        'USER': 'root',
+        'PASSWORD':'password',
+        'HOST':'localhost',
+        'PORT': '3306',
+    }
+}'''
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -195,30 +199,16 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-#STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 
-#FAVICON_PATH = STATIC_URL + 'images/favicon.ico'
+FAVICON_PATH = STATIC_URL + 'images/favicon.ico'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-#MEDIA_URL = '/media/'
-
-#Azure Media and Static storage Settings
-DEFAULT_FILE_STORAGE = 'outstation.azure.AzureMediaStorage'
-
-STATICFILES_STORAGE = 'outstation.azure.AzureStaticStorage'
-
-STATIC_LOCATION = "static"
-MEDIA_LOCATION = "media"
-
-AZURE_ACCOUNT_NAME = '<Azure account Name>'
-AZURE_CUSTOM_DOMAIN = '<Azure domain>'
-STATIC_URL = '<Azure static blob storage url>'
-MEDIA_URL = '<Azure media blob storage url>'
-
+MEDIA_URL = '/media/'
 
 #LOGIN_REDIRECT_URL="comments"
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY =''
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '' #Paste Secret Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='939419215497-b025e0lmn1odvusd7ud2t5lqe10v7bis.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'wGDdPItc88Gi5j5M6Zc09Jwu' #Paste Secret Key
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
     'social_core.pipeline.social_auth.social_uid',
@@ -232,15 +222,27 @@ SOCIAL_AUTH_PIPELINE = (
     'outstation.apps.auth.pipeline.save_profile',
 )
 
-AKISMET_API_KEY = ''
+AKISMET_API_KEY = 'da83dcbe7551'
 
-AKISMET_SITE_URL = ''
+AKISMET_SITE_URL = 'http://localhost:8000/'
 
 AKISMET_TEST_MODE = False
 
 SITE_ID = 1
 
-#Logging
+# Wagtail settings
+
+WAGTAIL_SITE_NAME = "outstation"
+
+#WAGTAILIMAGES_JPEG_QUALITY = 70
+
+# Base URL to use when referring to full URLs within the Wagtail admin backend -
+# e.g. in notification emails. Don't include '/admin' or a trailing slash
+BASE_URL = 'http://localhost:8000'
+
+X_SCRIPT_NAME = '/outstation-cab-booking'
+
+BOOKING_FORM_URL = "https://www.meru.in/outstation"#"https://dolfiionn.merucabs.com:5443/outstation?embed=true"
 
 LOGGING = {
 	'version': 1,
@@ -275,12 +277,13 @@ LOGGING = {
 			'class': 'logging.StreamHandler',
 			'formatter': 'django.server',
 		},
-		'errors_file':{
-			'level':'ERROR',
-			'class':'logging.FileHandler',
-			'filters': ['require_debug_false'],
-			'filename':'<LOG DIRECTORY>/ErrorLoggers.log',
+        'errors_file':{
+			'level':'INFO',
+		    'class':'logging.FileHandler',
+            'filters': ['require_debug_false'],
+			'filename':'C:/logs/ErrorLoggers.log',
 		},
+
 	},
 	'loggers': {
 		'django': {
@@ -294,19 +297,3 @@ LOGGING = {
 		}
 	}
 }
-
-
-# Wagtail settings
-
-WAGTAIL_SITE_NAME = "outstation"
-
-#WAGTAILIMAGES_JPEG_QUALITY = 70
-
-# Base URL to use when referring to full URLs within the Wagtail admin backend -
-# e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = '<outstation prod url>'
-
-BOOKING_FORM_URL = '<booking form url>'
-
-X_SCRIPT_NAME = '/outstation-cab-booking'
-
