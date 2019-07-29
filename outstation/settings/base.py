@@ -308,3 +308,5 @@ BASE_URL = '<outstation prod url>'
 
 BOOKING_FORM_URL = '<booking form url>'
 
+X_SCRIPT_NAME = '/outstation-cab-booking'
+
